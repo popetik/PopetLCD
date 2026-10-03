@@ -1,5 +1,8 @@
 #include <PopetLCD.h>
 
+// Пример как вывести данные из ацп на дисплей
+// Дисплей сам переводит числа в ХХ.ХХ формат(фиксированная точка), тоесть отправили 1023 число на дисплей, а дисплей покажет их в виде 10.23
+
 uint16_t Voltage = 0;
 
 void setup() {
@@ -7,9 +10,9 @@ void setup() {
 }
 
 void loop() {
-  int raw = analogRead(A0);
-  uint16_t Voltage = (uint32_t)raw * 500 / 1023;
-  LCD_printInt(Voltage);
+  int raw = analogRead(A0); // счиываем данные из ацп
+  uint16_t Voltage = (uint32_t)raw * 500 / 1023; // умножаем сырье(0-1023) на опорное напряжения и делим на максимальное значения ацп(1023)
+  LCD_printInt(Voltage); // Выводим готовые Voltage, дисплей их переведет в Х.ХХ формат
   LCD_setCursor(5, 0);
   LCD_print("V");
   _delay_ms(500);
